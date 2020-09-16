@@ -26,6 +26,33 @@ class Data:
                         for self.__json in self.__jsons:
                             self.__dicts.append(json.loads(self.__json))
 
+    def __analysis(self):
+        self.__types = ['PushEvent', 'IssueCommentEvent', 'IssuesEvent', 'PullRequestEvent']
+        self.__cnt_perP = {}
+        self.__cnt_perR = {}
+        self.__cnt_perPperR = {}
+
+        for self.__dict in self.__dicts:
+            # 如果属于四种事件之一 则增加相应值
+            if self.__dict['type'] in self.__types:
+                self.__event = self.__dict['type']
+                self.__name = self.__dict['actor']['login']
+                self.__repo = self.__dict['repo']['name']
+                self.__cnt_perP[self.__name + self.__event] = self.__cnt_perP.get(self.__name + self.__event, 0) + 1
+                self.__cnt_perR[self.__repo + self.__event] = self.__cnt_perP.get(self.__repo + self.__event, 0) + 1
+                self.__cnt_perPperR[self.__name + self.__repo + self.__event] = self.__cnt_perPperR.get(self.__name
+                                    + self.__repo + self.__event, 0) + 1
+
+
+    def __save_newjson(self):
+        with open("1.json", 'w', encoding='utf-8') as f:
+            json.dump(self.__cnt_perP, f)
+        with open("2.json", 'w', encoding='utf-8') as f:
+            json.dump(self.__cnt_perR, f)
+        with open("3.json", 'w', encoding='utf-8') as f:
+            json.dump(self.__cnt_perPperR, f)
+        print("Save to json files successfully!")
+
 
 def run():
     my_parser = argparse.ArgumentParser(description='analysis the json file')
