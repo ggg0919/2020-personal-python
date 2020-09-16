@@ -53,6 +53,17 @@ class Data:
             json.dump(self.__cnt_perPperR, f)
         print("Save to json files successfully!")
 
+    def __read_newjson(self):
+        self.__cnt_perP = {}
+        self.__cnt_perR = {}
+        self.__cnt_perPperR = {}
+        with open("1.json", encoding='utf-8') as f:
+            self.__cnt_perP = json.load(f)
+        with open("2.json", encoding='utf-8') as f:
+            self.__cnt_perR = json.load(f)
+        with open("3.json", encoding='utf-8') as f:
+            self.__cnt_perPperR = json.load(f)
+
 
 def run():
     my_parser = argparse.ArgumentParser(description='analysis the json file')
