@@ -64,6 +64,15 @@ class Data:
         with open("3.json", encoding='utf-8') as f:
             self.__cnt_perPperR = json.load(f)
 
+    def query_cnt_user(self, user: str, event: str) -> int:
+        return self.__cnt_perP.get(user + event, 0)
+
+    def query_cnt_repo(self, repo: str, event: str) -> int:
+        return self.__cnt_perR.get(repo + event, 0)
+
+    def query_cnt_user_and_repo(self, user, repo, event) -> int:
+        return self.__cnt_perPperR.get(user + repo + event, 0)
+
 
 def run():
     my_parser = argparse.ArgumentParser(description='analysis the json file')
