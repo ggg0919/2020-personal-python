@@ -37,7 +37,7 @@ class Data:
                 self.__cnt_perP[self.__name + self.__event] = self.__cnt_perP.get(self.__name + self.__event, 0) + 1
                 self.__cnt_perR[self.__repo + self.__event] = self.__cnt_perR.get(self.__repo + self.__event, 0) + 1
                 self.__cnt_perPperR[self.__name + self.__repo + self.__event] = self.__cnt_perPperR.get(self.__name
-                                    + self.__repo + self.__event, 0) + 1
+                                                                                + self.__repo + self.__event, 0) + 1
 
     def __save_newjson(self):
         with open("1.json", 'w', encoding='utf-8') as f:
@@ -47,7 +47,6 @@ class Data:
         with open("3.json", 'w', encoding='utf-8') as f:
             json.dump(self.__cnt_perPperR, f)
         print("Save to json files successfully!")
-
 
     def __read_newjson(self):
         self.__cnt_perP = {}
